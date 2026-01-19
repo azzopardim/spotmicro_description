@@ -1,17 +1,20 @@
 # spotmicro_description
 
-A minimal and revamped version of [SpotMicroAI](https://spotmicroai.readthedocs.io/en/latest/) description file pulled from its [Gitlab](https://gitlab.com/custom_robots/spotmicroai/simulation) repository.
+URDF/xacro, meshes, and RViz helpers for the Spot/Nova model. Based on the SpotMicroAI description, with paths adjusted for this package name.
 
-The meshes' path have been modified so the models can be located using its package name.
+## Usage (ROS 2)
+After building the workspace and sourcing setup, you can visualize the model:
 
-## Quick Start
+```bash
+# Launch RViz with the robot description
+ros2 launch spotmicro_description view_model.launch.py
 
-You can view the model by running:
+# Minimal URDF view (xacro → robot_state_publisher + joint_state_publisher)
+ros2 launch spotmicro_description view_urdf_rviz.launch.py
+```
 
-    roslaunch spotmicro_description view_urdf.launch
+To regenerate the URDF from xacro manually:
 
-## Testing
-
-You can modify the Xacro description and see the changes in the UDF file with this command:
-
-    rosrun xacro xacro spotmicroai.urdf.xacro > spotmicroai.urdf
+```bash
+ros2 run xacro xacro $(ros2 pkg prefix spotmicro_description)/share/spotmicro_description/urdf/spotmicroai.urdf.xacro > /tmp/spotmicroai.urdf
+```
